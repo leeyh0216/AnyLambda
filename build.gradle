@@ -10,6 +10,9 @@ dependencies {
 	compile group: 'org.scala-lang', name: 'scala-compiler', version: '2.11.8'
 	compile group: 'org.apache.spark', name: 'spark-core_2.11', version: '2.1.0'
 
+	//Http Library
+	compile group: 'org.glassfish.jersey.core', name: 'jersey-common', version: '2.25.1'
+
 	//Logger
 	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
 	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.2'

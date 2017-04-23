@@ -1,4 +1,4 @@
-package com.ncsoft.ncslambda.pipeline
+package com.ncsoft.ncslambda.pipes
 
 import com.ncsoft.ncslambda.application.{ApplicationContext, HttpContext}
 import com.ncsoft.ncslambda.util.CodeComplier

@@ -1,7 +1,7 @@
-package com.ncsoft.ncslambda.pipeline
+package com.ncsoft.ncslambda.pipes
 
 import com.ncsoft.ncslambda.application.ApplicationContext
-import org.slf4j.{Logger, LoggerFactory}
+import com.ncsoft.ncslambda.util.Logging
 
 import scala.collection.mutable.ListBuffer
 import scala.reflect.runtime.{universe => u}
@@ -9,8 +9,7 @@ import scala.reflect.runtime.{universe => u}
   * Pipe Class들을 연결하여 연산을 수행 후 결과를 돌려주는 Pipeline Class
   * @author leeyh0216
   */
-class PipeLine(appCtx : ApplicationContext) {
-  val logger : Logger = LoggerFactory.getLogger(classOf[PipeLine])
+class PipeLine(appCtx : ApplicationContext) extends Logging{
   val ctx = appCtx
   val pipeList = new ListBuffer[Pipe[_,_]]()
 
