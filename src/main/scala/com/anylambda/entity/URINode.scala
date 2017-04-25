@@ -1,4 +1,4 @@
-package com.ncsoft.ncslambda.entity
+package com.anylambda.entity
 
 import java.util.{Calendar, Date}
 

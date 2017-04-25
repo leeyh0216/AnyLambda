@@ -1,4 +1,4 @@
-package com.ncsoft.ncslambda.util
+package com.anylambda.util
 
 import org.slf4j.LoggerFactory
 

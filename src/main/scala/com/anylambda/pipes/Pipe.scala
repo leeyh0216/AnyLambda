@@ -1,6 +1,6 @@
-package com.ncsoft.ncslambda.pipes
+package com.anylambda.pipes
 
-import com.ncsoft.ncslambda.application.ApplicationContext
+import com.anylambda.application.ApplicationContext
 
 import scala.reflect.runtime.{universe => u}
 

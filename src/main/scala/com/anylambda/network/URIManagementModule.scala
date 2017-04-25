@@ -1,9 +1,9 @@
-package com.ncsoft.ncslambda.network
+package com.anylambda.network
 
 import java.util
 
-import com.ncsoft.ncslambda.entity.URINode
-import com.ncsoft.ncslambda.util.Logging
+import com.anylambda.entity.URINode
+import com.anylambda.util.Logging
 import org.glassfish.jersey.uri.UriTemplate
 
 /**

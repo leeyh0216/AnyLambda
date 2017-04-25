@@ -1,8 +1,8 @@
-package com.ncsoft.ncslambda.network
+package com.anylambda.network
 
 import java.util
 
-import com.ncsoft.ncslambda.entity.URINode
+import com.anylambda.entity.URINode
 import org.glassfish.jersey.uri.UriTemplate
 import org.junit.{Assert, Test}
 

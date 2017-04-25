@@ -1,7 +1,6 @@
-package com.ncsoft.ncslambda.util
+package com.anylambda.util
 
-
-import com.ncsoft.ncslambda.pipes.Pipe
+import com.anylambda.pipes.Pipe
 
 import scala.reflect.runtime.currentMirror
 import scala.tools.reflect.ToolBox

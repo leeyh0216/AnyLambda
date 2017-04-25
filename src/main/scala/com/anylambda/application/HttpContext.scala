@@ -1,4 +1,4 @@
-package com.ncsoft.ncslambda.application
+package com.anylambda.application
 
 /**
   * Created by leeyh0216 on 17. 4. 23.

@@ -1,7 +1,7 @@
-package com.ncsoft.ncslambda.pipes
+package com.anylambda.pipes
 
-import com.ncsoft.ncslambda.application.ApplicationContext
-import com.ncsoft.ncslambda.util.Logging
+import com.anylambda.application.ApplicationContext
+import com.anylambda.util.Logging
 
 import scala.collection.mutable.ListBuffer
 import scala.reflect.runtime.{universe => u}

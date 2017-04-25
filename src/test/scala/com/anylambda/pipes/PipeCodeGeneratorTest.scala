@@ -1,7 +1,7 @@
-package com.ncsoft.ncslambda.pipes
+package com.anylambda.pipes
 
-import com.ncsoft.ncslambda.application.{ApplicationContext, HttpContext}
-import com.ncsoft.ncslambda.util.CodeComplier
+import com.anylambda.application.{ApplicationContext, HttpContext}
+import com.anylambda.util.CodeComplier
 import org.junit.{After, Assert, Before, Test}
 
 /**
@@ -25,8 +25,8 @@ class PipeCodeGeneratorTest {
     val p = new CodeComplier()
     val pipe : Pipe[_,_] = p.sourceToClass(
       """
-       import com.ncsoft.ncslambda.application._
-       import com.ncsoft.ncslambda.pipeline._
+       import com.anylambda.application._
+       import com.anylambda.pipes._
        new Pipe[List[String], Int]{
 
        override def process(ctx: ApplicationContext, input: List[String]): Int = {
@@ -47,8 +47,8 @@ class PipeCodeGeneratorTest {
     val p = new CodeComplier()
     val pipe : Pipe[_,_] = p.sourceToClass(
       """
-       import com.ncsoft.ncslambda.application._
-       import com.ncsoft.ncslambda.pipeline._
+       import com.anylambda.application._
+       import com.anylambda.pipes._
        new HttpPipe{
 
        override def process(ctx: ApplicationContext, input: Map[String,String]): String = {
