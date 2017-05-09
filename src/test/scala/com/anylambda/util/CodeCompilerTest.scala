@@ -1,16 +1,23 @@
 package com.anylambda.util
 
+import java.io.File
+import java.lang.reflect.Method
+import java.net.{URI, URL, URLClassLoader}
+
 import com.anylambda.application.ApplicationContext
 import com.anylambda.exception.CompileException
 import com.anylambda.pipes.Pipe
 import org.junit.{After, Assert, Before, Test}
+import sun.misc.Launcher
+
+import scala.util.control.NonFatal
 
 /**
   * Created by leeyh0216 on 17. 4. 25.
   */
 class CodeCompilerTest extends Logging{
 
-  val codeCompiler = new CodeComplier
+  val codeCompiler = new CodeComplier(Thread.currentThread().getContextClassLoader)
 
   @throws(classOf[Exception])
   @Before
@@ -78,6 +85,24 @@ class CodeCompilerTest extends Logging{
         |
         |      override def caughtError(exception: Exception): Unit = println("Exception Caused")
         |    }
+      """.stripMargin)
+
+  }
+
+  @Test
+  def testLoadExternalJar() = {
+    val jarURI = new URI("file://"+new File("src/test/resources/okhttp-3.7.0.jar").getAbsolutePath).toURL
+    var jarURI2 = new URI("file://"+new File("src/test/resources/okio-1.0.0.jar").getAbsolutePath).toURL
+    val clsLoader = new DynamicClassLoader(Seq(jarURI,jarURI2),Thread.currentThread().getContextClassLoader)
+    Thread.currentThread().setContextClassLoader(clsLoader)
+
+    val cc = new CodeComplier(clsLoader)
+
+    val client : Any= cc.sourceToClass(
+      """
+        |import okhttp3.OkHttpClient
+        |val okhttp = new OkHttpClient
+        |okhttp
       """.stripMargin)
 
   }

@@ -1,18 +1,20 @@
 package com.anylambda.util
 
-import com.anylambda.exception.CompileException
-import com.anylambda.pipes.Pipe
+import java.io.{File, FileNotFoundException}
+import java.net.{URI, URL, URLClassLoader}
 
-import scala.reflect.runtime.currentMirror
+import com.anylambda.exception.CompileException
+import org.apache.xbean.classloader.JarFileClassLoader
+
+import scala.reflect.runtime.{ universe => u}
 import scala.tools.reflect.ToolBox
-import scala.reflect.runtime.{universe => u}
 import scala.util.control.NonFatal
 /**
   * Runtime에 Plain Text 형태의 Source Code를 Class로 변환하는 클래스
   *
   */
-class CodeComplier() extends Logging{
-  val toolbox = currentMirror.mkToolBox()
+class CodeComplier(clsLoader : ClassLoader) extends Logging{
+  val toolbox = u.runtimeMirror(clsLoader).mkToolBox()
 
   /**
     * 매개변수로 전달된 code(Scala)를 컴파일하여 OutputType으로 캐스팅하여 반환하는 함수.
@@ -32,5 +34,19 @@ class CodeComplier() extends Logging{
     catch{
       case NonFatal(t)  => throw new CompileException(t)
     }
+  }
+  @throws(classOf[FileNotFoundException])
+  def addExternalJarToClassLoader(jarDir : String, classLoader : ClassLoader) = {
+    val jarFile = new File(jarDir)
+    if(!jarFile.exists())
+      throw new FileNotFoundException(String.format("JarFile을 찾을 수 없습니다 : %s", jarDir))
+
+    val jarURI = new URL("file://" + jarFile.getAbsolutePath + "")
+    var jarURI2 = new URL("file://"+new File("src/test/resources/okio-1.0.0.jar").getAbsolutePath)
+    val jarURLS = new Array[URL](2)
+    jarURLS(0) = jarURI
+    jarURLS(1) = jarURI2
+
+    new JarFileClassLoader("",jarURLS,classLoader)
   }
 }
