@@ -20,3 +20,8 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+anylambda-core/spark-warehouse/*
+anylambda-core/metastore_db/*
+anylambda-core/out
+anylambda-core/derby.log
+anylambda-core/test.jar
