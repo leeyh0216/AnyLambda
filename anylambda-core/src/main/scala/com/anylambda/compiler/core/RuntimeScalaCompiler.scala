@@ -62,10 +62,20 @@ object RuntimeScalaCompiler {
   }
 }
 /**
-  * Runtime scala code compiler
   *
-  * @param srcDir source file's root directory
-  * @param dependenciesDirs dependency library file's root directory
+  *
+  */
+/**
+  * Runtime Scala Code Compiler.
+  * This class compile scala codes with dependencies in runtime.
+  *
+  * This class cannot instantiated with public constructor.
+  *
+  * @param srcDir Source file directory(root) to compile.
+  * @param dependenciesDirs Dependency jar directories
+  * @param classDir Class file output directory
+  * @param jarName Jar name to create
+  * @param jarDir Jar directory to create
   */
 @throws[FileNotFoundException]
 @throws[IllegalArgumentException]
@@ -82,6 +92,8 @@ class RuntimeScalaCompiler private (srcDir: String, dependenciesDirs: Option[Lis
   private val jarFile = new File(jarDir, jarName.concat(".jar"))
 
   private def getFilesRecursively(dir: String, endsWith: String): List[String] = {
+    logger.trace(s"Get files recursively in ${dir} which extension is ${endsWith}")
+
     val file = new File(dir)
     if(!file.exists())
       throw new FileNotFoundException(s"${file.getAbsolutePath} does not exists.")
@@ -106,7 +118,7 @@ class RuntimeScalaCompiler private (srcDir: String, dependenciesDirs: Option[Lis
     */
   @throws[FileNotFoundException]
   private def getScalaFiles(sourceRootDir: String): List[String] = {
-    logger.info(s"Get .scala files in source directory: ${sourceRootDir}")
+    logger.trace(s"Get .scala files in source directory: ${sourceRootDir}")
 
     val scalaFilesToCompile = getFilesRecursively(sourceRootDir, ".scala")
     if(scalaFilesToCompile.isEmpty)
@@ -162,7 +174,6 @@ class RuntimeScalaCompiler private (srcDir: String, dependenciesDirs: Option[Lis
       case e: Exception=>
         val errMsg = ClassCompileMessage(Severity.ERROR, e.getMessage, Calendar.getInstance().getTime)
         ClassCompileResult(false, List[ClassCompileMessage](errMsg))
-
     }
   }
 
